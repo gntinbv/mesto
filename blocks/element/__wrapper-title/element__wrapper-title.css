@@ -1,0 +1,12 @@
+.element__wrapper-title{
+  background-color: white;
+  color: black;
+  padding: 25px 15px 31px 21px;
+  /* display: flex;
+   */
+  display: grid;
+  grid-template-columns: 1fr 0.1fr;
+  align-items: center;
+  justify-content: space-between;
+
+}
