@@ -1,4 +1,4 @@
-.profile{
+.profile {
   max-width: 880px;
   margin: 0 auto;
   padding-top: 40px;
@@ -9,15 +9,14 @@
 
 @media screen and (max-width: 914px) {
   .profile {
-    max-width: calc(282px * 2 + 17px) ;
+    max-width: calc(282px * 2 + 17px);
     flex-direction: column;
   }
 }
 
 @media screen and (max-width: 614px) {
   .profile {
-    max-width: 282px ;
+    max-width: 282px;
     padding-top: 42px;
-    
   }
 }

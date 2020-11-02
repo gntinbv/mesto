@@ -1,4 +1,4 @@
-.profile__wrapper{
+.profile__wrapper {
   display: flex;
   align-items: center;
 }
@@ -6,6 +6,5 @@
 @media screen and (max-width: 614px) {
   .profile__wrapper {
     flex-direction: column;
-    
   }
 }
