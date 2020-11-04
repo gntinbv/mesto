@@ -4,7 +4,6 @@
 
 @media screen and (max-width: 614px) {
   .profile__wrapper-info {
-    text-align: center;
+    align-items: center;
   }
 }
-text-align: center;
