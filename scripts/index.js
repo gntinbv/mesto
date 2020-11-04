@@ -17,9 +17,6 @@ function closePopup(event) {
   popup.classList.remove('popup_opened');
 }
 
-editButton.addEventListener('click', showPopup);
-popupCloseButton.addEventListener('click', closePopup);
-
 function submitForm(event) {
   event.preventDefault(); /* этот код предотвращает выполнение действий браузера "по-умолчанию" помимо тех, что указали мы */
   profileName.textContent = nameFieldPopup.value;
@@ -27,4 +24,6 @@ function submitForm(event) {
   closePopup()
 }
 
+editButton.addEventListener('click', showPopup);
+popupCloseButton.addEventListener('click', closePopup);
 popupForm.addEventListener('submit', submitForm);
