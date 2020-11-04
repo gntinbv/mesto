@@ -13,6 +13,7 @@
   .profile__name {
     font-size: 33px;
     line-height: 38px;
+    max-width: 394px;
   }
 }
 
