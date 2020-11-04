@@ -1,3 +1,10 @@
 .profile__wrapper-info {
   display: flex;
 }
+
+@media screen and (max-width: 614px) {
+  .profile__wrapper-info {
+    text-align: center;
+  }
+}
+text-align: center;
