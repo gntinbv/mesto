@@ -1,29 +1,48 @@
-const popup = document.querySelector('.popup');
-const popupCloseButton = document.querySelector('.popup__close');
+const popupTypeEdit = document.querySelector('.popup_type_edit');
+const popupTypeAdd = document.querySelector('.popup_type_add');
+const popupTypeEditCloseButton = document.querySelector('.popup__close_type_edit');
+const popupTypeAddCloseButton = document.querySelector('.popup__close_type_add');
 const editButton = document.querySelector('.profile__edit-button');
+const addButton = document.querySelector('.profile__add-button')
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
-const popupForm = document.querySelector('.popup__form');
+const popupFormTypeEdit = document.querySelector('.popup__form_type_edit');
+const popupFormTypeAdd = document.querySelector('.popup__form_type_add');
 const nameFieldPopup = document.querySelector('.popup__input_type_name');
+const titleFieldPopup = document.querySelector('.popup__input_type_title');
+const urlFieldPopup = document.querySelector('.popup__input_type_url');
 const descriptionFieldPopup = document.querySelector('.popup__input_type_description');
 
-function showPopup() {
-  popup.classList.add('popup_opened');
+function showPopupTypeEdit() {
+  popupTypeEdit.classList.add('popup_opened');
   nameFieldPopup.value = profileName.textContent;
   descriptionFieldPopup.value = profileDescription.textContent;
 }
-
-function closePopup(event) {
-  popup.classList.remove('popup_opened');
+function showPopupTypeAdd() {
+  popupTypeAdd.classList.add('popup_opened');
+  titleFieldPopup.value = "";
+  urlFieldPopup.value = "";
+} 
+function closePopupTypeEdit(event) {
+  popupTypeEdit.classList.remove('popup_opened');
 }
-
-function submitForm(event) {
+function closePopupTypeAdd(event) {
+  popupTypeAdd.classList.remove('popup_opened');
+}
+function submitFormTypeEdit(event) {
   event.preventDefault(); /* этот код предотвращает выполнение действий браузера "по-умолчанию" помимо тех, что указали мы */
   profileName.textContent = nameFieldPopup.value;
   profileDescription.textContent = descriptionFieldPopup.value;
-  closePopup()
+  closePopupTypeEdit()
+}
+function submitFormTypeAdd(event) {
+  event.preventDefault(); /* этот код предотвращает выполнение действий браузера "по-умолчанию" помимо тех, что указали мы */
+  closePopupTypeAdd()
 }
 
-editButton.addEventListener('click', showPopup);
-popupCloseButton.addEventListener('click', closePopup);
-popupForm.addEventListener('submit', submitForm);
+editButton.addEventListener('click', showPopupTypeEdit);
+addButton.addEventListener('click', showPopupTypeAdd);
+popupTypeEditCloseButton.addEventListener('click', closePopupTypeEdit);
+popupTypeAddCloseButton.addEventListener('click', closePopupTypeAdd);
+popupFormTypeEdit.addEventListener('submit', submitFormTypeEdit);
+popupFormTypeAdd.addEventListener('submit', submitFormTypeAdd);
