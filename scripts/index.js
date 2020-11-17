@@ -46,6 +46,10 @@ function addCard(cardName, cardUrl) {
   cardElement.querySelector('.element__image').src = cardUrl;
   cardElement.querySelector('.element__title').textContent = cardName;
 
+  cardElement.querySelector('.element__like').addEventListener('click', function(event){
+    event.target.classList.toggle('element__like_active');  
+  })
+
   elementsContainer.append(cardElement);
 }
 
