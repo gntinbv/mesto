@@ -29,55 +29,9 @@
       <button class="profile__add-button" type="button" aria-label="Добавить"></button>
     </section>
 
-    <section class="elements">
-      <article class="element">
-        <img class="element__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Изображение места" />
-        <div class="element__wrapper-title">
-          <h3 class="element__title">Карачаевск</h3>
-          <button class="element__like" type="button" aria-label="Лайк"></button>
-        </div>
-      </article>
-
-      <article class="element">
-        <img class="element__image" src="./images/konduki_20201017_163153.jpg" alt="Изображение места" />
-        <div class="element__wrapper-title">
-          <h3 class="element__title">Кондуки</h3>
-          <button class="element__like" type="button" aria-label="Лайк"></button>
-        </div>
-      </article>
-
-      <article class="element">
-        <img class="element__image" src="./images/IMG_20200725_122415.jpg" alt="Изображение места" />
-        <div class="element__wrapper-title">
-          <h3 class="element__title">Домбай</h3>
-          <button class="element__like" type="button" aria-label="Лайк"></button>
-        </div>
-      </article>
-
-      <article class="element">
-        <img class="element__image" src="./images/elbr.jpg" alt="Изображение места" />
-        <div class="element__wrapper-title">
-          <h3 class="element__title">Гора Эльбрус</h3>
-          <button class="element__like" type="button" aria-label="Лайк"></button>
-        </div>
-      </article>
-
-      <article class="element">
-        <img class="element__image" src="./images/dubna.jpg" alt="Изображение места" />
-        <div class="element__wrapper-title">
-          <h3 class="element__title">Дубнинская Гидроэлектростанция</h3>
-          <button class="element__like" type="button" aria-label="Лайк"></button>
-        </div>
-      </article>
-
-      <article class="element">
-        <img class="element__image" src="./images/spb.jpg" alt="Изображение места" />
-        <div class="element__wrapper-title">
-          <h3 class="element__title">Санкт Петербург</h3>
-          <button class="element__like" type="button" aria-label="Лайк"></button>
-        </div>
-      </article>
+    <section class="elements">      
     </section>
+    
   </main>
 
   <footer class="footer">
@@ -104,13 +58,28 @@
       <h3 class="popup__title popup__title_type_add">Новое Место</h3>
       <form class="popup__form popup__form_type_add" name="add-place">
         <input type="text" class="popup__input popup__input_type_title" name="photo-title" placeholder="Название" />
-        <input type="text" class="popup__input popup__input_type_url" name="photo-url" placeholder="Ссылка на картинку" />
+        <input type="text" class="popup__input popup__input_type_url" name="photo-url"
+          placeholder="Ссылка на картинку" />
         <button class="popup__save-button popup__save-button_type_add" type="submit" aria-label="Создать">
           Создать
         </button>
       </form>
     </div>
   </div>
+
+  <div class="popup popup_type_image">
+
+  </div>
+
+  <template id="card-template">
+    <article class="element">
+      <img class="element__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Изображение места" />
+      <div class="element__wrapper-title">
+        <h3 class="element__title">Карачаевск</h3>
+        <button class="element__like" type="button" aria-label="Лайк"></button>
+      </div>
+    </article>
+  </template>
 
   <script src="./scripts/index.js"></script>
 </body>
