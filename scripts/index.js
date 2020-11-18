@@ -91,18 +91,22 @@ function closePopupTypeImage() {
 
 function addCard(cardName, cardUrl) {
   const cardElement = document.querySelector('#card-template').content.cloneNode(true);
-  cardElement.querySelector('.element__image').src = cardUrl;
-  cardElement.querySelector('.element__title').textContent = cardName;
-  cardElement.querySelector('.element__like').addEventListener('click', function (event) {
+  cardElement.querySelector('.element__image').src = cardUrl; // назначили url для картинки
+  cardElement.querySelector('.element__title').textContent = cardName; // назначили название карточки
+  cardElement.querySelector('.element__like').addEventListener('click', function (event) { // слушатель, устанавливающий или убирающий лайк
     event.target.classList.toggle('element__like_active');
   });
   cardElement.querySelector('.element').addEventListener('click', (evt) => { // слушатель, определяющий нажатие на карточку, кроме кнопки лайка и корзины
     if (!(evt.target.classList.contains('element__like') || evt.target.classList.contains('element__remove-button'))) {
-      showPopupTypeImage();
-      popupImageTypeImage.src = evt.target.closest('.element').querySelector('.element__image').src;
-      popupTitleTypeImage.textContent = evt.target.closest('.element').querySelector('.element__title').textContent;
+      showPopupTypeImage(); // добавили класс видимости попапа, тем самым отобразив его на экране
+      popupImageTypeImage.src = evt.target.closest('.element').querySelector('.element__image').src; // приравняли url картинки в карточке url картинке в попапе
+      popupTitleTypeImage.textContent = evt.target.closest('.element').querySelector('.element__title').textContent; // приравняли текст в карточке тексту в попапе
     }
   });
+  cardElement.querySelector('.element__remove-button').addEventListener('click', event => { // слушатель на удаление карточки
+    const card = event.target.closest('.element');
+    card.remove();
+  })
   elementsContainer.prepend(cardElement);
 }
 
