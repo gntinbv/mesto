@@ -47,8 +47,7 @@ const popupImageTypeImage = document.querySelector('.popup__image');
 const popupTitleTypeImage = document.querySelector('.popup__image-title')
 const popupTypeImageCloseButton = document.querySelector('.popup__close_type_image');
 
-
-
+const addForm = document.querySelector('.popup__form_type_add');
 
 
 
@@ -78,6 +77,9 @@ function closePopupTypeAdd() {
 function submitFormTypeAdd(event) {
   event.preventDefault(); /* этот код предотвращает выполнение действий браузера "по-умолчанию" помимо тех, что указали мы */
   closePopupTypeAdd()
+  const cardUrl = addForm.querySelector('.popup__input_type_url').value;
+  const cardName = addForm.querySelector('.popup__input_type_title').value;
+  addCard(cardName, cardUrl);
 }
 
 function showPopupTypeImage() {
@@ -99,11 +101,9 @@ function addCard(cardName, cardUrl) {
       showPopupTypeImage();
       popupImageTypeImage.src = evt.target.closest('.element').querySelector('.element__image').src;
       popupTitleTypeImage.textContent = evt.target.closest('.element').querySelector('.element__title').textContent;
-
     }
   });
-
-  elementsContainer.append(cardElement);
+  elementsContainer.prepend(cardElement);
 }
 
 initialCards.forEach((item) => addCard(item.name, item.link));
