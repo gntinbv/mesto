@@ -68,8 +68,6 @@ function submitFormTypeEdit(event) {
 
 function showPopupTypeAdd() {
   popupTypeAdd.classList.add('popup_opened');
-  titleFieldPopup.value = "";
-  urlFieldPopup.value = "";
 }
 function closePopupTypeAdd() {
   popupTypeAdd.classList.remove('popup_opened');
@@ -80,6 +78,7 @@ function submitFormTypeAdd(event) {
   const cardUrl = addForm.querySelector('.popup__input_type_url').value;
   const cardName = addForm.querySelector('.popup__input_type_title').value;
   addCard(cardName, cardUrl);
+  popupFormTypeAdd.reset();
 }
 
 function showPopupTypeImage() {
@@ -96,12 +95,10 @@ function addCard(cardName, cardUrl) {
   cardElement.querySelector('.element__like').addEventListener('click', function (event) { // слушатель, устанавливающий или убирающий лайк
     event.target.classList.toggle('element__like_active');
   });
-  cardElement.querySelector('.element').addEventListener('click', (evt) => { // слушатель, определяющий нажатие на карточку, кроме кнопки лайка и корзины
-    if (!(evt.target.classList.contains('element__like') || evt.target.classList.contains('element__remove-button'))) {
-      showPopupTypeImage(); // добавили класс видимости попапа, тем самым отобразив его на экране
-      popupImageTypeImage.src = evt.target.closest('.element').querySelector('.element__image').src; // приравняли url картинки в карточке url картинке в попапе
-      popupTitleTypeImage.textContent = evt.target.closest('.element').querySelector('.element__title').textContent; // приравняли текст в карточке тексту в попапе
-    }
+  cardElement.querySelector('.element__image').addEventListener('click', (evt) => { // слушатель, определяющий нажатие на карточку, кроме кнопки лайка и корзины
+    showPopupTypeImage(); // добавили класс видимости попапа, тем самым отобразив его на экране
+    popupImageTypeImage.src = evt.target.closest('.element').querySelector('.element__image').src; // приравняли url картинки в карточке url картинке в попапе
+    popupTitleTypeImage.textContent = evt.target.closest('.element').querySelector('.element__title').textContent; // приравняли текст в карточке тексту в попапе
   });
   cardElement.querySelector('.element__remove-button').addEventListener('click', event => { // слушатель на удаление карточки
     const card = event.target.closest('.element');
