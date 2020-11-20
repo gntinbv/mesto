@@ -49,16 +49,13 @@ const popupTypeImageCloseButton = document.querySelector('.popup__close_type_ima
 
 const addForm = document.querySelector('.popup__form_type_add');
 
-
-
-function showPopupTypeEdit() {
-  popupTypeEdit.classList.add('popup_opened');
-  nameFieldPopup.value = profileName.textContent;
-  descriptionFieldPopup.value = profileDescription.textContent;
+function showPopup(popupType) {
+  popupType.classList.add('popup_opened');
 }
-function closePopupTypeEdit() {
-  popupTypeEdit.classList.remove('popup_opened');
+function closePopup(popupType) {
+  popupType.classList.remove('popup_opened');
 }
+
 function submitFormTypeEdit(event) {
   event.preventDefault(); /* этот код предотвращает выполнение действий браузера "по-умолчанию" помимо тех, что указали мы */
   profileName.textContent = nameFieldPopup.value;
@@ -66,12 +63,6 @@ function submitFormTypeEdit(event) {
   closePopupTypeEdit()
 }
 
-function showPopupTypeAdd() {
-  popupTypeAdd.classList.add('popup_opened');
-}
-function closePopupTypeAdd() {
-  popupTypeAdd.classList.remove('popup_opened');
-}
 function submitFormTypeAdd(event) {
   event.preventDefault(); /* этот код предотвращает выполнение действий браузера "по-умолчанию" помимо тех, что указали мы */
   closePopupTypeAdd()
@@ -81,12 +72,6 @@ function submitFormTypeAdd(event) {
   popupFormTypeAdd.reset();
 }
 
-function showPopupTypeImage() {
-  popupTypeImage.classList.add('popup_opened');
-}
-function closePopupTypeImage() {
-  popupTypeImage.classList.remove('popup_opened');
-}
 
 function addCard(cardName, cardUrl) {
   const cardElement = document.querySelector('#card-template').content.cloneNode(true);
@@ -95,8 +80,8 @@ function addCard(cardName, cardUrl) {
   cardElement.querySelector('.element__like').addEventListener('click', function (event) { // слушатель, устанавливающий или убирающий лайк
     event.target.classList.toggle('element__like_active');
   });
-  cardElement.querySelector('.element__image').addEventListener('click', (evt) => { // слушатель, определяющий нажатие на карточку, кроме кнопки лайка и корзины
-    showPopupTypeImage(); // добавили класс видимости попапа, тем самым отобразив его на экране
+  cardElement.querySelector('.element__image').addEventListener('click', (evt) => {
+    showPopup(popupTypeImage); // добавили класс видимости попапа, тем самым отобразив его на экране
     popupImageTypeImage.src = evt.target.closest('.element').querySelector('.element__image').src; // приравняли url картинки в карточке url картинке в попапе
     popupTitleTypeImage.textContent = evt.target.closest('.element').querySelector('.element__title').textContent; // приравняли текст в карточке тексту в попапе
   });
@@ -109,12 +94,24 @@ function addCard(cardName, cardUrl) {
 
 initialCards.forEach((item) => addCard(item.name, item.link));
 
-editButton.addEventListener('click', showPopupTypeEdit);
-popupTypeEditCloseButton.addEventListener('click', closePopupTypeEdit);
+editButton.addEventListener('click', function () {
+  showPopup(popupTypeEdit);
+  nameFieldPopup.value = profileName.textContent;
+  descriptionFieldPopup.value = profileDescription.textContent;
+});
+popupTypeEditCloseButton.addEventListener('click', function () {
+  closePopup(popupTypeEdit)
+});
 popupFormTypeEdit.addEventListener('submit', submitFormTypeEdit);
 
-addButton.addEventListener('click', showPopupTypeAdd);
-popupTypeAddCloseButton.addEventListener('click', closePopupTypeAdd);
+addButton.addEventListener('click', function () {
+  showPopup(popupTypeAdd);
+});
+popupTypeAddCloseButton.addEventListener('click', function () {
+  closePopup(popupTypeAdd);
+});
 popupFormTypeAdd.addEventListener('submit', submitFormTypeAdd);
 
-popupTypeImageCloseButton.addEventListener('click', closePopupTypeImage);
+popupTypeImageCloseButton.addEventListener('click', function () {
+  closePopup(popupTypeImage);
+});
