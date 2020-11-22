@@ -60,20 +60,19 @@ function submitFormTypeEdit(event) {
   event.preventDefault(); /* этот код предотвращает выполнение действий браузера "по-умолчанию" помимо тех, что указали мы */
   profileName.textContent = nameFieldPopup.value;
   profileDescription.textContent = descriptionFieldPopup.value;
-  closePopupTypeEdit()
+  closePopup(popupTypeEdit);
 }
 
 function submitFormTypeAdd(event) {
   event.preventDefault(); /* этот код предотвращает выполнение действий браузера "по-умолчанию" помимо тех, что указали мы */
-  closePopupTypeAdd()
+  closePopup(popupTypeAdd);
   const cardUrl = addForm.querySelector('.popup__input_type_url').value;
   const cardName = addForm.querySelector('.popup__input_type_title').value;
-  addCard(cardName, cardUrl);
+  addCard(elementsContainer, cardName, cardUrl);
   popupFormTypeAdd.reset();
 }
 
-
-function addCard(cardName, cardUrl) {
+function createElement(cardName, cardUrl) {
   const cardElement = document.querySelector('#card-template').content.cloneNode(true);
   cardElement.querySelector('.element__image').src = cardUrl; // назначили url для картинки
   cardElement.querySelector('.element__title').textContent = cardName; // назначили название карточки
@@ -89,10 +88,16 @@ function addCard(cardName, cardUrl) {
     const card = event.target.closest('.element');
     card.remove();
   })
-  elementsContainer.prepend(cardElement);
+  return cardElement;
 }
 
-initialCards.forEach((item) => addCard(item.name, item.link));
+function addCard (listElement, name, link){
+  listElement.prepend(createElement(name, link));
+}
+
+initialCards.forEach(function(item){ // Рендерим первоначальный массив карточек
+  addCard(elementsContainer, item.name, item.link);
+});
 
 editButton.addEventListener('click', function () {
   showPopup(popupTypeEdit);
