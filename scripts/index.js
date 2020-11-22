@@ -91,11 +91,11 @@ function createElement(cardName, cardUrl) {
   return cardElement;
 }
 
-function addCard (listElement, name, link){
+function addCard(listElement, name, link) {
   listElement.prepend(createElement(name, link));
 }
 
-initialCards.forEach(function(item){ // Рендерим первоначальный массив карточек
+initialCards.forEach(function (item) { // Рендерим первоначальный массив карточек
   addCard(elementsContainer, item.name, item.link);
 });
 

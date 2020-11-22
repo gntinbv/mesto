@@ -8,8 +8,7 @@
   cursor: pointer;
   height: 18.13px;
   width: 20.76px;
-  transition: opacity 0.3s linear;  
-  
+  transition: opacity 0.3s linear;
 }
 
 .element__like:hover {
