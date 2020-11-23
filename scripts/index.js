@@ -41,13 +41,13 @@ const popupTypeAddCloseButton = document.querySelector('.popup__close_type_add')
 const popupFormTypeAdd = document.querySelector('.popup__form_type_add');
 const titleFieldPopup = document.querySelector('.popup__input_type_title');
 const urlFieldPopup = document.querySelector('.popup__input_type_url');
+const popupInputUrl = popupFormTypeAdd.querySelector('.popup__input_type_url');
+const popupInputTitle = popupFormTypeAdd.querySelector('.popup__input_type_title');
 
 const popupTypeImage = document.querySelector('.popup_type_image');
 const popupImageTypeImage = document.querySelector('.popup__image');
-const popupTitleTypeImage = document.querySelector('.popup__image-title')
+const popupTitleTypeImage = document.querySelector('.popup__image-title');
 const popupTypeImageCloseButton = document.querySelector('.popup__close_type_image');
-
-const addForm = document.querySelector('.popup__form_type_add');
 
 function showPopup(popupType) {
   popupType.classList.add('popup_opened');
@@ -66,25 +66,31 @@ function submitFormTypeEdit(event) {
 function submitFormTypeAdd(event) {
   event.preventDefault(); /* этот код предотвращает выполнение действий браузера "по-умолчанию" помимо тех, что указали мы */
   closePopup(popupTypeAdd);
-  const cardUrl = addForm.querySelector('.popup__input_type_url').value;
-  const cardName = addForm.querySelector('.popup__input_type_title').value;
+  const cardUrl = popupInputUrl.value;
+  const cardName = popupInputTitle.value;
   addCard(elementsContainer, cardName, cardUrl);
   popupFormTypeAdd.reset();
 }
 
 function createElement(cardName, cardUrl) {
   const cardElement = document.querySelector('#card-template').content.cloneNode(true);
-  cardElement.querySelector('.element__image').src = cardUrl; // назначили url для картинки
-  cardElement.querySelector('.element__title').textContent = cardName; // назначили название карточки
-  cardElement.querySelector('.element__like').addEventListener('click', function (event) { // слушатель, устанавливающий или убирающий лайк
+  const elementImage = cardElement.querySelector('.element__image');
+  const elementTitle = cardElement.querySelector('.element__title');
+  const elementLike = cardElement.querySelector('.element__like');
+  const elementRemoveButton = cardElement.querySelector('.element__remove-button');
+
+  elementImage.src = cardUrl; // назначили url для картинки
+  elementTitle.textContent = cardName; // назначили название карточки
+  
+  elementImage.addEventListener('click', () => {
+    showPopup(popupTypeImage); // добавили класс видимости попапа, тем самым отобразив его на экране
+    popupImageTypeImage.src = elementImage.src; // приравняли url картинки в карточке url картинке в попапе
+    popupTitleTypeImage.textContent = elementTitle.textContent; // приравняли текст в карточке тексту в попапе
+  });
+  elementLike.addEventListener('click', (event) => { // слушатель, устанавливающий или убирающий лайк
     event.target.classList.toggle('element__like_active');
   });
-  cardElement.querySelector('.element__image').addEventListener('click', (evt) => {
-    showPopup(popupTypeImage); // добавили класс видимости попапа, тем самым отобразив его на экране
-    popupImageTypeImage.src = evt.target.closest('.element').querySelector('.element__image').src; // приравняли url картинки в карточке url картинке в попапе
-    popupTitleTypeImage.textContent = evt.target.closest('.element').querySelector('.element__title').textContent; // приравняли текст в карточке тексту в попапе
-  });
-  cardElement.querySelector('.element__remove-button').addEventListener('click', event => { // слушатель на удаление карточки
+  elementRemoveButton.addEventListener('click', event => { // слушатель на удаление карточки
     const card = event.target.closest('.element');
     card.remove();
   })
@@ -120,3 +126,4 @@ popupFormTypeAdd.addEventListener('submit', submitFormTypeAdd);
 popupTypeImageCloseButton.addEventListener('click', function () {
   closePopup(popupTypeImage);
 });
+
