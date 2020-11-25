@@ -51,23 +51,29 @@ const popupTitleTypeImage = document.querySelector('.popup__image-title');
 const popupTypeImageCloseButton = document.querySelector('.popup__close_type_image');
 
 function showPopup(popupType) {
-  popupType.classList.add('popup_opened');  
-  function closePopopByOverlay(event) {
+  popupType.classList.add('popup_opened');
+  function closePopupByOverlay(event) {
     if (event.target.classList.contains('popup_opened')) {
       closePopup(popupType);
+      removeListenerAfterClosePopup();
     }
   }
-  function closePopopByEsc(event) {    
+  function closePopupByEsc(event) {
     if (event.key === 'Escape') {
       closePopup(popupType);
+      removeListenerAfterClosePopup();
     }
   }
-  popupType.addEventListener('click', closePopopByOverlay);
-  document.addEventListener('keydown', closePopopByEsc);
+  function removeListenerAfterClosePopup() {
+    popupType.removeEventListener('click', closePopupByOverlay);
+    document.removeEventListener('keydown', closePopupByEsc);
+  }
+  popupType.addEventListener('click', closePopupByOverlay);
+  document.addEventListener('keydown', closePopupByEsc);
 }
 
 function closePopup(popupType) {
-  popupType.classList.remove('popup_opened');  
+  popupType.classList.remove('popup_opened');
 }
 
 function submitFormTypeEdit(event) {
