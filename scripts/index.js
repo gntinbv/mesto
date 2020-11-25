@@ -1,3 +1,4 @@
+
 const initialCards = [
   {
     name: 'Архыз',
@@ -50,10 +51,23 @@ const popupTitleTypeImage = document.querySelector('.popup__image-title');
 const popupTypeImageCloseButton = document.querySelector('.popup__close_type_image');
 
 function showPopup(popupType) {
-  popupType.classList.add('popup_opened');
+  popupType.classList.add('popup_opened');  
+  function closePopopByOverlay(event) {
+    if (event.target.classList.contains('popup_opened')) {
+      closePopup(popupType);
+    }
+  }
+  function closePopopByEsc(event) {    
+    if (event.key === 'Escape') {
+      closePopup(popupType);
+    }
+  }
+  popupType.addEventListener('click', closePopopByOverlay);
+  document.addEventListener('keydown', closePopopByEsc);
 }
+
 function closePopup(popupType) {
-  popupType.classList.remove('popup_opened');
+  popupType.classList.remove('popup_opened');  
 }
 
 function submitFormTypeEdit(event) {
@@ -81,7 +95,7 @@ function createElement(cardName, cardUrl) {
 
   elementImage.src = cardUrl; // назначили url для картинки
   elementTitle.textContent = cardName; // назначили название карточки
-  
+
   elementImage.addEventListener('click', () => {
     showPopup(popupTypeImage); // добавили класс видимости попапа, тем самым отобразив его на экране
     popupImageTypeImage.src = elementImage.src; // приравняли url картинки в карточке url картинке в попапе
