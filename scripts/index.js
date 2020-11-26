@@ -1,4 +1,3 @@
-
 const initialCards = [
   {
     name: 'Архыз',
@@ -64,7 +63,7 @@ function showPopup(popupType) {
       removeListenerAfterClosePopup();
     }
   }
-  function removeListenerAfterClosePopup() {
+  function removeListenerAfterClosePopup() { //т.к. при каждом открытии попапа назначается слушатель, то его нужно удалять каждый раз при закрытии попапа
     popupType.removeEventListener('click', closePopupByOverlay);
     document.removeEventListener('keydown', closePopupByEsc);
   }
