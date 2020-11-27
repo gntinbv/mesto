@@ -88,7 +88,7 @@ function submitFormTypeAdd(event) {
   const cardUrl = popupInputUrl.value;
   const cardName = popupInputTitle.value;
   addCard(elementsContainer, cardName, cardUrl);
-  popupFormTypeAdd.reset();
+  
 }
 
 function createElement(cardName, cardUrl) {
@@ -128,6 +128,7 @@ editButton.addEventListener('click', function () {
   showPopup(popupTypeEdit);
   nameFieldPopup.value = profileName.textContent;
   descriptionFieldPopup.value = profileDescription.textContent;
+  enableValidation(validationConfig); 
 });
 popupTypeEditCloseButton.addEventListener('click', function () {
   closePopup(popupTypeEdit)
@@ -135,6 +136,7 @@ popupTypeEditCloseButton.addEventListener('click', function () {
 popupFormTypeEdit.addEventListener('submit', submitFormTypeEdit);
 
 addButton.addEventListener('click', function () {
+  popupFormTypeAdd.reset();
   showPopup(popupTypeAdd);
 });
 popupTypeAddCloseButton.addEventListener('click', function () {

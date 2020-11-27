@@ -1,4 +1,4 @@
-.popup__save-button {
+.popup__button {
   display: block;
   outline: none;
   border: none;
@@ -14,6 +14,7 @@
   line-height: 22px;
   padding: 0;
   transition: opacity 0.3s linear;
+  margin-bottom: 10px;
 }
 
 .popup__save-button:hover {
