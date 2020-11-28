@@ -20,10 +20,14 @@ function checkInputValidity(form, input, config) { //функция, прове�
   }
 }
 
+function disabledButton(button, config) {
+  button.classList.remove(config.inactiveButtonClass);
+  button.disabled = false;
+}
+
 function setButtonState(button, isActive, config) {
   if (isActive) {
-    button.classList.remove(config.inactiveButtonClass);
-    button.disabled = false;
+    disabledButton(button, config);
   } else {
     button.classList.add(config.inactiveButtonClass);
     button.disabled = true;
@@ -47,10 +51,9 @@ function enableValidation(config) {
   forms.forEach((form) => {
     setEventListeners(form, config);
 
-    /*  form.addEventListener('submit', (evt) => {
-         evt.preventDefault();
-         console.log('отправка формы');
-     }); */
+    form.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+    });
 
     const submitButton = form.querySelector(config.submitButtonSelector);
     setButtonState(submitButton, form.checkValidity(), config)

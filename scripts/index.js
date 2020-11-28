@@ -43,36 +43,35 @@ const titleFieldPopup = document.querySelector('.popup__input_type_title');
 const urlFieldPopup = document.querySelector('.popup__input_type_url');
 const popupInputUrl = popupFormTypeAdd.querySelector('.popup__input_type_url');
 const popupInputTitle = popupFormTypeAdd.querySelector('.popup__input_type_title');
+const popupButtonTypeAdd = document.querySelector('.popup__button_type_add');
 
 const popupTypeImage = document.querySelector('.popup_type_image');
 const popupImageTypeImage = document.querySelector('.popup__image');
 const popupTitleTypeImage = document.querySelector('.popup__image-title');
 const popupTypeImageCloseButton = document.querySelector('.popup__close_type_image');
 
+function closePopupByOverlay(event, popupType) {
+  if (event.target.classList.contains('popup_opened')) {
+    closePopup(popupType);
+  }
+}
+function closePopupByEsc(event, popupType) {
+  if (event.key === 'Escape') {
+    closePopup(popupType);
+  }
+}
+
 function showPopup(popupType) {
   popupType.classList.add('popup_opened');
-  function closePopupByOverlay(event) {
-    if (event.target.classList.contains('popup_opened')) {
-      closePopup(popupType);
-      removeListenerAfterClosePopup();
-    }
-  }
-  function closePopupByEsc(event) {
-    if (event.key === 'Escape') {
-      closePopup(popupType);
-      removeListenerAfterClosePopup();
-    }
-  }
-  function removeListenerAfterClosePopup() { //т.к. при каждом открытии попапа назначается слушатель, то его нужно удалять каждый раз при закрытии попапа
-    popupType.removeEventListener('click', closePopupByOverlay);
-    document.removeEventListener('keydown', closePopupByEsc);
-  }
-  popupType.addEventListener('click', closePopupByOverlay);
-  document.addEventListener('keydown', closePopupByEsc);
+  console.log(popupType);
+  popupType.addEventListener('click', (evt) => closePopupByOverlay(evt, popupType));
+  document.addEventListener('keydown', (evt) => closePopupByEsc(evt, popupType));
 }
 
 function closePopup(popupType) {
   popupType.classList.remove('popup_opened');
+  popupType.removeEventListener('click', (evt) => closePopupByOverlay(evt, popupType));
+  document.removeEventListener('keydown', (evt) => closePopupByEsc(evt, popupType));
 }
 
 function submitFormTypeEdit(event) {
@@ -88,7 +87,6 @@ function submitFormTypeAdd(event) {
   const cardUrl = popupInputUrl.value;
   const cardName = popupInputTitle.value;
   addCard(elementsContainer, cardName, cardUrl);
-  
 }
 
 function createElement(cardName, cardUrl) {
@@ -128,7 +126,7 @@ editButton.addEventListener('click', function () {
   showPopup(popupTypeEdit);
   nameFieldPopup.value = profileName.textContent;
   descriptionFieldPopup.value = profileDescription.textContent;
-  enableValidation(validationConfig); 
+  enableValidation(validationConfig);
 });
 popupTypeEditCloseButton.addEventListener('click', function () {
   closePopup(popupTypeEdit)
@@ -138,6 +136,7 @@ popupFormTypeEdit.addEventListener('submit', submitFormTypeEdit);
 addButton.addEventListener('click', function () {
   popupFormTypeAdd.reset();
   showPopup(popupTypeAdd);
+  popupButtonTypeAdd.classList.add('popup__button_disabled');
 });
 popupTypeAddCloseButton.addEventListener('click', function () {
   closePopup(popupTypeAdd);
